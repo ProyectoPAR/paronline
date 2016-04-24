@@ -3,10 +3,11 @@
     Created on : 18/04/2016, 11:17:31 PM
     Author     : root
 --%>
-<%@page import = "javax.servlet.http.HttpSession"
+<%@page 
         import  = "componentes.Producto"
+        import = "componentes.Conexion"
         import = "java.util.ArrayList"
-        import = "javax.servlet.http.HttpServletResponse" 
+        import = "java.sql.SQLException" 
         import = "java.io.PrintWriter"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,8 +19,10 @@
     
 %>
 <%!
-    public ArrayList<String> getCategorias(){
-        <ArrayList> categorias = new <ArrayList>();
+    public ArrayList<String> getCategorias() throws SQLException, ClassNotFoundException{
+        ArrayList<String> categorias = new ArrayList<String>();
+        Conexion.consultar("select descripcion from Categorias");
+        while(Conexion.getResult().next()) categorias.add(Conexion.getResult().getString("descripcion"));
         return categorias;
     }
 %>
@@ -47,6 +50,11 @@
             <form action="Producto" method="get">
                 <select name="categoria">
                     <option value="default">---</option>
+                    <%
+                        ArrayList<String> categorias = getCategorias();
+                        for(int i = 0 ; i < categorias.size() ; i ++)%> <option value="<%=categorias.get(i)%>"> 
+                            <%=categorias.get(i)%> </option> <%{
+                    %>
                     <option value="Deportes">Deportes</option>
                 </select>
                 <input type="text" name="descripcion" placeholder="Escriba una descripcion del producto"/>
