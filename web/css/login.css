@@ -1,0 +1,54 @@
+@import url('/opt/lampp/htdocs/hoppies/css/reset.css');
+
+body {
+	background: #FAFAFA;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 16px;
+}
+header{
+  background: blue;
+  color: white;
+  text-align: center;
+}
+
+.principal{
+  height: 60%;
+}
+
+.wrap{
+  margin: auto;
+  max-width: 600px;
+  width: 60%;
+  border-style: 2px solid;
+}
+
+.form{
+  margin: auto;
+  text-align: center;
+  margin: 15px 0px 15px 0px;
+}
+form input[type="text"], form input[type="password"]{
+  width: 350px;
+  margin-bottom: 20px;
+}
+
+input[type='button'],input[type='submit']{
+  width: 180px;
+  margin-top: 10px;
+}
+
+.normal{
+  border: 2px solid;
+  border-top-style: none;
+  border-left-style:none;
+  border-right-style:none;
+  border-color: blue;
+}
+
+.error{
+  border: 2px solid;
+  border-top-style: none;
+  border-left-style:none;
+  border-right-style:none;
+  border-color: red;
+}
