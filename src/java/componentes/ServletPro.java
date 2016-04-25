@@ -82,7 +82,7 @@ public class ServletPro extends HttpServlet {
             
             Conexion.cerrarConexion();
             session.setAttribute("lista_productos", productos);
-            response.sendRedirect("Producto.jsp");
+            response.sendRedirect("BusquedaProducto.jsp");
         }
         catch(Exception e){
             session.setAttribute("excepcion", e);
