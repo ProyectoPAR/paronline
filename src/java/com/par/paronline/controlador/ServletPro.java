@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.par.paronline.modelo.*;
 import com.par.paronline.utils.*;
+import javax.servlet.RequestDispatcher;
 
 /**
  *
@@ -47,7 +48,7 @@ public class ServletPro extends HttpServlet {
             throws ServletException, IOException{
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(true);
-        
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Busqueda.jsp");
         try{
             String descripcion = "";
             if(request.getParameter("categoria") == null && request.getParameter("descripcion") == null){
@@ -55,7 +56,7 @@ public class ServletPro extends HttpServlet {
             }
             else{
                 categoria = request.getParameter("categoria");
-                descripcion = request.getParameter("descripcion");
+                descripcion = '%'+request.getParameter("descripcion")+'%';
             }
             String query = "select p.descripcion pdes, c.descripcion cdes, precio from Producto p, Categoria c where "
                     + "p.id_categoria = c.id_categoria";
@@ -80,12 +81,14 @@ public class ServletPro extends HttpServlet {
                 categoria = Conexion.getResult().getString("cdes");
                 descripcion_prod = Conexion.getResult().getString("pdes");
                 precio = Conexion.getResult().getString("precio");
-                productos.add(new Producto(id_producto,categoria,descripcion_prod,precio));
+                productos.add(new Producto(categoria,descripcion_prod,precio));
             }
-            
             Conexion.cerrarConexion();
             session.setAttribute("lista_productos", productos);
-            response.sendRedirect("Producto.jsp");
+            if(dispatcher != null){
+                dispatcher.forward(request, response);
+            }
+            
         }
         catch(Exception e){
             session.setAttribute("excepcion", e);

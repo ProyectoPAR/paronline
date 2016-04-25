@@ -60,7 +60,7 @@ public class PruebaBase {
                 producto = Conexion.getResult().getString("pdes");
                 descripcion_prod = Conexion.getResult().getString("cdes");
                 precio = Conexion.getResult().getString("precio");
-                productos.add(new Producto(producto,categoria,descripcion_prod,precio));
+                productos.add(new Producto(categoria,descripcion_prod,precio));
                 System.out.println(producto + descripcion_prod + precio);
             }
             Conexion.cerrarConexion();
