@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package componentes;
+package com.par.paronline.controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  *
  * @author root
  */
-public class Login extends HttpServlet {
+public class ServletLogin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -69,7 +69,7 @@ public class Login extends HttpServlet {
             
             
         } catch (Exception ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServletLogin.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex.getMessage());
         }
     }
@@ -89,9 +89,9 @@ public class Login extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServletLogin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServletLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -109,9 +109,9 @@ public class Login extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServletLogin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServletLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

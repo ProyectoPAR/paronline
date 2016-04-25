@@ -10,7 +10,7 @@
     </servlet>
     <servlet>
         <servlet-name>Producto</servlet-name>
-        <servlet-class>componentes.ServletPro</servlet-class>
+        <servlet-class>com.par.paronline.controlador.ServletPro</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Carro</servlet-name>

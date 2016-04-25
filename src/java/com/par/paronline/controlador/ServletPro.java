@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package componentes;
+package com.par.paronline.controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,6 +20,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import com.par.paronline.modelo.*;
+import com.par.paronline.utils.*;
+
 /**
  *
  * @author root
@@ -46,22 +49,47 @@ public class ServletPro extends HttpServlet {
         HttpSession session = request.getSession(true);
         
         try{
-            String url = "jdbc:postgresql://localhost:5432/paronline";
-            Conexion c = new Conexion(url,"postgres","sate150495");
-            c.consultar("select p.descripcion pdes, c.descripcion cdes, p.precio precio from Producto p, Categoria c where p.id_categoria = c.id_categoria;");
-            while(c.getResult().next()){
-                
-                categoria = c.getResult().getString("pdes");
-                descripcion_prod = c.getResult().getString("cdes");
-                precio = c.getResult().getString("precio");
+            String descripcion = "";
+            if(request.getParameter("categoria") == null && request.getParameter("descripcion") == null){
+                categoria = "all";
+            }
+            else{
+                categoria = request.getParameter("categoria");
+                descripcion = request.getParameter("descripcion");
+            }
+            String query = "select p.descripcion pdes, c.descripcion cdes, precio from Producto p, Categoria c where "
+                    + "p.id_categoria = c.id_categoria";
+            ArrayList<String> args = new ArrayList<String>();
+            if(categoria.equals("all") && descripcion.equals("")){
+                Conexion.consultar(query);
+            }
+            else{
+                if(!categoria.equals("all")){
+                    query = query + " and c.descripcion = ?";
+                    args.add(categoria);
+                }
+                if(!descripcion.equals("")){
+                    query = query + " and p.descripcion like ?";
+                    args.add(descripcion);
+                }
+                Conexion.consultar(query, args);
+              
+            }
+            
+            while(Conexion.getResult().next()){
+                categoria = Conexion.getResult().getString("cdes");
+                descripcion_prod = Conexion.getResult().getString("pdes");
+                precio = Conexion.getResult().getString("precio");
                 productos.add(new Producto(id_producto,categoria,descripcion_prod,precio));
             }
-            c.cerrarConexion();
+            
+            Conexion.cerrarConexion();
             session.setAttribute("lista_productos", productos);
             response.sendRedirect("Producto.jsp");
         }
         catch(Exception e){
             session.setAttribute("excepcion", e);
+            response.getWriter().println(e);
         }
     }
 
