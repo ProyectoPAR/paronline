@@ -32,14 +32,21 @@ public class Conexion {
         this.conexion = DriverManager.getConnection(url,user, pass);
     }
 
-    
-    public static void consultar(String query, String[] args) throws SQLException, ClassNotFoundException{
+    /**
+     *
+     * @param query
+     * @param args
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public static void consultar(String query, ArrayList<String> args) throws SQLException, ClassNotFoundException{
         Class.forName("org.postgresql.Driver");
         conexion = DriverManager.getConnection(url,user, pass);
         sentencia = conexion.prepareStatement(query);
-        for(int i = 0 ; i < args.length ; i ++){
-            sentencia.setString(i, args[i+1]);
+        for(int i = 0 ; i < args.size() ; i ++){
+            sentencia.setString(i + 1, args.get(i));
         }
+        System.out.println(query);
         result = sentencia.executeQuery();
     }
     

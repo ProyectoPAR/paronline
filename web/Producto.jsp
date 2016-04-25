@@ -18,10 +18,10 @@
     
     
 %>
-<%!
+<%!//esta funcion obtiene todos las categorias y las almacena en un arraylist de String
     public ArrayList<String> getCategorias() throws SQLException, ClassNotFoundException{
         ArrayList<String> categorias = new ArrayList<String>();
-        Conexion.consultar("select descripcion from Categorias");
+        Conexion.consultar("select descripcion from Categoria");
         while(Conexion.getResult().next()) categorias.add(Conexion.getResult().getString("descripcion"));
         return categorias;
     }
@@ -49,13 +49,13 @@
         <section>
             <form action="Producto" method="get">
                 <select name="categoria">
-                    <option value="default">---</option>
-                    <%
+                    <option value="all">Todas</option>
+                    <%//cargamos las categorias obtenidas de la funcion en un select, exite un valor por default
                         ArrayList<String> categorias = getCategorias();
-                        for(int i = 0 ; i < categorias.size() ; i ++)%> <option value="<%=categorias.get(i)%>"> 
-                            <%=categorias.get(i)%> </option> <%{
+                        for(int i = 0 ; i < categorias.size() ; i ++){%> 
+                            <option value="<%=categorias.get(i)%>"> 
+                            <%=categorias.get(i)%> </option> <%}
                     %>
-                    <option value="Deportes">Deportes</option>
                 </select>
                 <input type="text" name="descripcion" placeholder="Escriba una descripcion del producto"/>
                 <input type="submit" value="Buscar"/>

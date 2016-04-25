@@ -19,27 +19,45 @@ import org.postgresql.Driver;
 public class PruebaBase {
     String descripcion_prod = "";
     String precio = "";
-    String id_producto = "";
+    String producto = "";
     String categoria = "";
     ArrayList<Producto> productos = new ArrayList<Producto>();
     public void f(){
         try{
-            String url = "jdbc:postgresql://localhost:5432/paronline";
-            Conexion c = new Conexion(url,"postgres","sate150495");
-            c.consultar("select p.descripcion pdes, c.descripcion cdes, p.precio precio from Producto p, Categoria c where p.id_categoria = c.id_categoria;");
-            while(c.getResult().next()){
-                
-                categoria = c.getResult().getString("cdes");
-                descripcion_prod = c.getResult().getString("pdes");
-                precio = c.getResult().getString("precio");
-                productos.add(new Producto(id_producto,categoria,descripcion_prod,precio));
+            String categoria = "Deportes";
+            String descripcion = "";
+            String query = "select p.descripcion pdes, c.descripcion cdes, precio from Producto p, Categoria c where "
+                    + "p.id_categoria = c.id_categoria";
+            ArrayList<String> args = new ArrayList<String>();
+            if(categoria.equals("all") && descripcion.equals("")){
+                Conexion.consultar(query);
             }
-            System.out.println(productos.get(0));
-            c.cerrarConexion();
+            else{
+                if(!categoria.equals("all")){
+                    query = query + " and c.descripcion = ?";
+                    args.add(categoria);
+                }
+                if(!descripcion.equals("")){
+                    query = query + " and p.descripcion like %?%";
+                    args.add(descripcion);
+                }
+                Conexion.consultar(query, args);
+              
+            }
+            
+            while(Conexion.getResult().next()){
+                
+                producto = Conexion.getResult().getString("pdes");
+                descripcion_prod = Conexion.getResult().getString("cdes");
+                precio = Conexion.getResult().getString("precio");
+                productos.add(new Producto(producto,categoria,descripcion_prod,precio));
+                System.out.println(producto + descripcion_prod + precio);
+            }
+            Conexion.cerrarConexion();
             
         }
         catch(Exception e){
-            System.out.println(e);
+            System.out.println("hola "+e);
         }
     }
     public static void main(String args[]){
