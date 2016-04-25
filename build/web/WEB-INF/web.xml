@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>Login</servlet-name>
-        <servlet-class>componentes.Login</servlet-class>
+        <servlet-name>ServletLogin</servlet-name>
+        <servlet-class>com.par.paronline.controlador.ServletLogin</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Usuario</servlet-name>
-        <servlet-class>componentes.ServletUs</servlet-class>
+        <servlet-class>com.par.paronline.controlador.ServletUs</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Producto</servlet-name>
@@ -14,10 +14,10 @@
     </servlet>
     <servlet>
         <servlet-name>Carro</servlet-name>
-        <servlet-class>componentes.ServletCar</servlet-class>
+        <servlet-class>com.par.paronline.controlador.ServletCar</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Login</servlet-name>
+        <servlet-name>ServletLogin</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
