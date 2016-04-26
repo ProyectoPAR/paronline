@@ -19,6 +19,7 @@
                 <li> <form action="Usuario" method="get"><input type="submit" value="Usuario"/></form> </li>
                 <li> <form action="Producto" method="get"><input type="submit" value="Producto"/></form> </li>
                 <li> <form action="Carrito" method="get"><input type="submit" value="Carrito"/></form> </li>
+                <li>  <%=request.getPathInfo()%>  </li>
               </ul>
             </nav>
           </div>

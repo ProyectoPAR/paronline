@@ -3,11 +3,17 @@
     Created on : 18/04/2016, 10:34:56 PM
     Author     : root
 --%>
-<%@page import = "javax.servlet.http.HttpSession"%>
-<%@page import = "javax.servlet.http.HttpServlet"
-        import = "javax.servlet.http.HttpServletRequest"
-        import = "javax.servlet.http.HttpServletResponse"
-        import = "javax.servlet.http.HttpSession" %>
+<%@page import = "java.util.ArrayList"
+        import = "com.par.paronline.modelo.Producto"
+        import = "com.par.paronline.modelo.ListaProductos"%>
+
+
+<%
+    ListaProductos carrito = new ListaProductos();
+    request.getSession(true);
+    session.setAttribute("carrito", carrito);
+
+%>
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

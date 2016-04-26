@@ -34,7 +34,7 @@ public class ServletPro extends HttpServlet {
     String id_producto = "";
     String categoria = "";
     String query = "";
-    ArrayList<Producto> productos = null;
+    ListaProductos productos = null;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -47,7 +47,7 @@ public class ServletPro extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         response.setContentType("text/html;charset=UTF-8");
-        productos =  new ArrayList<Producto>();
+        productos =  new ListaProductos();
         HttpSession session = request.getSession(true);
         RequestDispatcher dispatcher = null;
         try{
@@ -59,7 +59,7 @@ public class ServletPro extends HttpServlet {
                 categoria = request.getParameter("categoria");
                 descripcion = '%'+request.getParameter("descripcion")+'%';
             }
-            String query = "select p.descripcion pdes, c.descripcion cdes, precio from Producto p, Categoria c where "
+            String query = "select p.id_producto idp,p.descripcion pdes, c.descripcion cdes, precio from Producto p, Categoria c where "
                     + "p.id_categoria = c.id_categoria";
             ArrayList<String> args = new ArrayList<String>();
             if(categoria.equals("all") && descripcion.equals("")){
@@ -81,17 +81,18 @@ public class ServletPro extends HttpServlet {
             }
             
             while(Conexion.getResult().next()){
+                id_producto = Conexion.getResult().getString("idp");
                 categoria = Conexion.getResult().getString("cdes");
                 descripcion_prod = Conexion.getResult().getString("pdes");
                 precio = Conexion.getResult().getString("precio");
-                productos.add(new Producto(categoria,descripcion_prod,precio));
+                productos.addProducto(new Producto(id_producto, categoria,descripcion_prod,precio));
             }
             Conexion.cerrarConexion();
             session.setAttribute("lista_productos", productos);
             if(dispatcher != null){
                 dispatcher.forward(request, response);
             }
-            
+            ;
         }
         catch(Exception e){
             session.setAttribute("excepcion", e);

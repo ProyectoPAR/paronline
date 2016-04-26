@@ -31,12 +31,13 @@ public class PruebaBase {
     String precio = "";
     String producto = "";
     String categoria = "";
+    String id_producto = "";
     ArrayList<Producto> productos = new ArrayList<Producto>();
     public void f(){
         try{
             String categoria = "Deportes";
             String descripcion = "";
-            String query = "select p.descripcion pdes, c.descripcion cdes, precio from Producto p, Categoria c where "
+            String query = "select p.id_producto idp, p.descripcion pdes, c.descripcion cdes, precio from Producto p, Categoria c where "
                     + "p.id_categoria = c.id_categoria";
             ArrayList<String> args = new ArrayList<String>();
             if(categoria.equals("all") && descripcion.equals("")){
@@ -48,7 +49,7 @@ public class PruebaBase {
                     args.add(categoria);
                 }
                 if(!descripcion.equals("")){
-                    query = query + " and p.descripcion like %?%";
+                    query = query + " and p.descripcion like ?";
                     args.add(descripcion);
                 }
                 Conexion.consultar(query, args);
@@ -56,11 +57,11 @@ public class PruebaBase {
             }
             
             while(Conexion.getResult().next()){
-                
+                id_producto = Conexion.getResult().getString("idp");
                 producto = Conexion.getResult().getString("pdes");
                 descripcion_prod = Conexion.getResult().getString("cdes");
                 precio = Conexion.getResult().getString("precio");
-                productos.add(new Producto(categoria,descripcion_prod,precio));
+                productos.add(new Producto(id_producto, categoria,descripcion_prod,precio));
                 System.out.println(producto + descripcion_prod + precio);
             }
             Conexion.cerrarConexion();

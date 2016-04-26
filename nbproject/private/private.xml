@@ -4,14 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/fabricio/NetBeansProjects/Carrito/src/java/com/par/paronline/controlador/ServletPro.java</file>
-            <file>file:/home/fabricio/NetBeansProjects/Carrito/web/Carrito.jsp</file>
             <file>file:/home/fabricio/NetBeansProjects/Carrito/web/index.jsp</file>
+            <file>file:/home/fabricio/NetBeansProjects/Carrito/src/java/com/par/paronline/controlador/ServletCar.java</file>
             <file>file:/home/fabricio/NetBeansProjects/Carrito/web/Busqueda.jsp</file>
             <file>file:/home/fabricio/NetBeansProjects/Carrito/src/java/com/par/paronline/utils/Conexion.java</file>
             <file>file:/home/fabricio/NetBeansProjects/Carrito/web/Producto.jsp</file>
-            <file>file:/home/fabricio/NetBeansProjects/Carrito/web/WEB-INF/web.xml</file>
             <file>file:/home/fabricio/NetBeansProjects/Carrito/src/java/componentes/PruebaBase.java</file>
-            <file>file:/home/fabricio/NetBeansProjects/Carrito/src/java/com/par/paronline/controlador/ServletLogin.java</file>
             <file>file:/home/fabricio/NetBeansProjects/Carrito/src/java/com/par/paronline/modelo/Producto.java</file>
         </group>
     </open-files>

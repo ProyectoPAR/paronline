@@ -13,7 +13,7 @@
         <servlet-class>com.par.paronline.controlador.ServletPro</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Carro</servlet-name>
+        <servlet-name>Carrito</servlet-name>
         <servlet-class>com.par.paronline.controlador.ServletCar</servlet-class>
     </servlet>
     <servlet-mapping>
@@ -29,8 +29,8 @@
         <url-pattern>/Producto</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Carro</servlet-name>
-        <url-pattern>/Carro</url-pattern>
+        <servlet-name>Carrito</servlet-name>
+        <url-pattern>/Carrito</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

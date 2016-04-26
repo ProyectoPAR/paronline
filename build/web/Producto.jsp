@@ -6,6 +6,7 @@
 <%@page 
         import  = "com.par.paronline.modelo.Producto"
         import = "com.par.paronline.utils.Conexion"
+        import = "com.par.paronline.modelo.ListaProductos"
         import = "java.util.ArrayList"
         import = "java.sql.SQLException" 
         import = "java.io.PrintWriter"%>
@@ -13,8 +14,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    ArrayList<Producto> productos = new ArrayList<Producto>();
-    productos = (ArrayList)session.getAttribute("lista_productos");
+    ListaProductos productos = (ListaProductos)session.getAttribute("lista_productos");
     
     
 %>
@@ -62,7 +62,7 @@
             </form>
             <%
                 for(int i = 0 ; i < productos.size() ; i ++){%>
-                <div><%=productos.get(i)%> <a href="Carrito">Agregar</a></div>
+                <div><%=productos.get(i)%> <input type="submit" value="Agregar" name="<%=productos.get(i).getDescripcion()%>"/> </div>
                 <%}
             %>
         </section>

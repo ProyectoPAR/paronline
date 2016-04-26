@@ -9,7 +9,8 @@
         import = "com.par.paronline.utils.Conexion"
         import = "java.util.ArrayList"
         import = "java.sql.SQLException" 
-        import = "java.io.PrintWriter"%>
+        import = "java.io.PrintWriter"
+        import = "com.par.paronline.modelo.ListaProductos"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -27,6 +28,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="css/login.css" charset="utf-8">
     </head>
     <header>
           <div class="">
@@ -53,12 +55,17 @@
                 <input type="text" name="descripcion" placeholder="Escriba una descripcion del producto"/>
                 <input type="submit" value="Buscar"/>
             </form>
+                <form action="Carrito" method="get">
             <%
-                ArrayList<Producto> productos = (ArrayList)session.getAttribute("lista_productos");
+                ListaProductos productos = (ListaProductos)session.getAttribute("lista_productos");
                 for(int i = 0 ; i < productos.size() ; i ++){%>
-                <div><%=productos.get(i)%> <a href="Carrito">Agregar</a></div>
+                <div>
+                    <input type="text" name="descripcion" value="<%=productos.get(i).getDescripcion()%>" readonly="yes">
+                    <input type="submit" name="agregar" value="Agregar">
+                </div>
                 <%}
             %>
+                </form>
         </section>
     </body>
 </html>
