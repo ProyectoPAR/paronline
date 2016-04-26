@@ -34,7 +34,7 @@ public class ServletPro extends HttpServlet {
     String id_producto = "";
     String categoria = "";
     String query = "";
-    ArrayList<Producto> productos = new ArrayList<Producto>();
+    ArrayList<Producto> productos = null;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -47,8 +47,9 @@ public class ServletPro extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         response.setContentType("text/html;charset=UTF-8");
+        productos =  new ArrayList<Producto>();
         HttpSession session = request.getSession(true);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("Busqueda.jsp");
+        RequestDispatcher dispatcher = null;
         try{
             String descripcion = "";
             if(request.getParameter("categoria") == null && request.getParameter("descripcion") == null){
@@ -63,8 +64,10 @@ public class ServletPro extends HttpServlet {
             ArrayList<String> args = new ArrayList<String>();
             if(categoria.equals("all") && descripcion.equals("")){
                 Conexion.consultar(query);
+                dispatcher = request.getRequestDispatcher("Producto.jsp");
             }
             else{
+                dispatcher = request.getRequestDispatcher("Busqueda.jsp");
                 if(!categoria.equals("all")){
                     query = query + " and c.descripcion = ?";
                     args.add(categoria);
