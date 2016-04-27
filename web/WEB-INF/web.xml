@@ -14,7 +14,11 @@
     </servlet>
     <servlet>
         <servlet-name>Carrito</servlet-name>
-        <servlet-class>com.par.paronline.controlador.ServletCar</servlet-class>
+        <servlet-class>com.par.paronline.controlador.ServletAdd</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletPop</servlet-name>
+        <servlet-class>com.par.paronline.controlador.ServletPop</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletLogin</servlet-name>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>Carrito</servlet-name>
         <url-pattern>/Carrito</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletPop</servlet-name>
+        <url-pattern>/ServletPop</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -11,6 +11,7 @@
 <%
     ListaProductos carrito = new ListaProductos();
     request.getSession(true);
+    session.setAttribute("user", "unknow");
     session.setAttribute("carrito", carrito);
 
 %>
@@ -32,7 +33,7 @@
               <ul>
                 <li> <form action="Usuario" method="get"><input type="submit" value="Usuario"/></form> </li>
                 <li> <a href="Producto">Producto</a>
-                <li> <form action="Carrito" method="get"><input type="submit" value="Carrito"/></form> </li>
+                <li> <a href="Carrito.jsp"> Carrito</a> </li>
               </ul>
             </nav>
           </div>

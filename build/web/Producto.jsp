@@ -13,11 +13,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%
-    ListaProductos productos = (ListaProductos)session.getAttribute("lista_productos");
-    
-    
-%>
+
 <%!//esta funcion obtiene todos las categorias y las almacena en un arraylist de String
     public ArrayList<String> getCategorias() throws SQLException, ClassNotFoundException{
         ArrayList<String> categorias = new ArrayList<String>();
@@ -41,7 +37,7 @@
               <ul>
                 <li> <form action="Usuario" method="get"><input type="submit" value="Usuario"/></form> </li>
                 <li> <form action="Producto" method="get"><input type="submit" value="Producto"/></form> </li>
-                <li> <form action="Carrito" method="get"><input type="submit" value="Carrito"/></form> </li>
+                <li> <a href="Carrito.jsp"> Carrito</a> </li>
               </ul>
             </nav>
           </div>
@@ -60,11 +56,17 @@
                 <input type="text" name="descripcion" placeholder="Escriba una descripcion del producto"/>
                 <input type="submit" value="Buscar"/>
             </form>
-            <%
-                for(int i = 0 ; i < productos.size() ; i ++){%>
-                <div><%=productos.get(i)%> <input type="submit" value="Agregar" name="<%=productos.get(i).getDescripcion()%>"/> </div>
-                <%}
-            %>
+            <form action="Carrito" method="get">
+                    <%
+                        ListaProductos productos = (ListaProductos)session.getAttribute("lista_productos");
+                        for(int i = 0 ; i < productos.size() ; i ++){%>
+                        <div>
+                            <input type="text" name="descripcion" value="<%=productos.get(i).getDescripcion()%>" readonly="yes">
+                            <input type="submit" name="agregar" value="Agregar">
+                        </div>
+                        <%}
+                    %>
+                </form>
         </section>
     </body>
 </html>

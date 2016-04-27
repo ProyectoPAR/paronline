@@ -18,10 +18,10 @@ import com.par.paronline.modelo.ListaProductos;
 import javax.servlet.RequestDispatcher;
 
 /**
- *
+ *Servlet para agregar producto a carrito
  * @author root
  */
-public class ServletCar extends HttpServlet {
+public class ServletAdd extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,7 +43,10 @@ public class ServletCar extends HttpServlet {
             String des_pro = (String)request.getParameter("descripcion");//se obtiene el parametro descripcion
             ListaProductos carrito = (ListaProductos)session.getAttribute("carrito");//obtenemos el carrito de la session
             Producto p = productos.buscarDescripcion(des_pro);
-            carrito.addProducto(p);//agregamos al carrito el producto, que por ahora es solo un string
+            if(!carrito.existeProducto(p))
+                carrito.addProducto(p);//agregamos al carrito el producto, que por ahora es solo un string
+            else
+                
             /*luego implementar que de la lista actual de busqueda se debe de sacar el producto que se agrego al carrito*/
             productos.removeProducto(p);
             

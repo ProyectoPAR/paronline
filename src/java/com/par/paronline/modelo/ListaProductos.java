@@ -45,6 +45,11 @@ public class ListaProductos{
         return null;//retorna null si no hay ningun producto con ese id
     }
     
+    public Boolean existeProducto(Producto p){
+        if(this.buscarId(p.getId_producto()) == null) return false;
+        else return true;
+    }
+    
     public Producto get(int i){
         return this.productos.get(i);
     }
