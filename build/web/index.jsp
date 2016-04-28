@@ -40,7 +40,7 @@
         </header>
         <section>
             <div>
-                <<form action="Login" method="get">
+                <<form action="Login" method="post">
                     <input type="text" name="user" placeholder="Ingrese su nombre"/>
                     <br/>
                     <input type="password" name="pass" placeholder="Ingrese su pass"/>

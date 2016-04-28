@@ -5,22 +5,42 @@
  */
 package com.par.paronline.controlador;
 
+import com.par.paronline.modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.*;
+import com.par.paronline.utils.Conexion;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javax.servlet.RequestDispatcher;
 /**
  *
  * @author root
  */
 public class ServletLogin extends HttpServlet {
 
+    public Usuario comprobarLogin(String user,String pass) throws SQLException, ClassNotFoundException{
+    Usuario u = null;
+    ArrayList<String> args = new ArrayList();
+    args.add(user);
+    args.add(pass);
+    String sql = "select * from persona where usuario = ? and pass = ?;";
+  
+    Conexion.consultar(sql, args);
+    if(Conexion.result.next()){
+        Usuario us = new Usuario();
+        us.setUsuario(Conexion.getResult().getString("usuario"));
+        us.setPass(Conexion.getResult().getString("pass")); 
+        return us;
+    }
+
+    return u;
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,39 +55,16 @@ public class ServletLogin extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            /*codigo para abrir una conexion con el postgresql mediante el jdbc*/
-            Class.forName("org.postgresql.Driver");
-            String url = "jdbc:postgresql://localhost:5432/paronline";
-            Connection con = DriverManager.getConnection(url,"postgres","sate150495");
-            Statement s = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);            
-            ResultSet rs = s.executeQuery("select * from usuarios");
-            rs.next();
-            String username = rs.getString("nombre");
-            String pass = rs.getString("pass");
-            rs.close();
-            s.close();
-            con.close();
-            /*fin del codigo para abrir conexion y realizar una consulta*/
-            String user = request.getParameter("user");
-            String psw = request.getParameter("psw");
-            String log;
-            if(user.compareTo(username) == 0 && psw.compareTo(pass) == 0){
-                log = "Usted se ha logeado correctamente";
+            Usuario u = comprobarLogin(request.getParameter("user"),request.getParameter("pass"));
+            if (u != null){
+                request.getSession().setAttribute("user", u.getUsuario()); //se setea la sesion con el username registrado
+                response.sendRedirect("producto.jsp"); //redirecciona a esta pagina mientras tanto averiguo como redireccionar 
+                //a la pagina de donde se vino
+            }else{
+                out.println("Nombre de usuario o contrasenha no validos. Intente de nuevo");
+                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+                rd.include(request,response);
             }
-            else{
-                log = "Login incorrecto";
-            }
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Servlet Login</title>");            
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<h1>Servlet Login at " +  log + "</h1>");
-                out.println("</body>");
-                out.println("</html>");
-            
-            
         } catch (Exception ex) {
             Logger.getLogger(ServletLogin.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex.getMessage());
