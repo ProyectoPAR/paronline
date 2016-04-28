@@ -48,5 +48,6 @@
             %>
         </form>
         <a href="#">Comprar Productos</a>
+        <div><%=request.getContextPath()%></div>
     </body>
 </html>
