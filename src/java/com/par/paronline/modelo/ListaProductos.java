@@ -5,6 +5,8 @@
  */
 package com.par.paronline.modelo;
 
+import com.par.paronline.utils.Conexion;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -56,5 +58,38 @@ public class ListaProductos{
     
     public int size(){
         return this.productos.size();
+    }
+    
+    public void getListaProductos(String categoria, String descripcion) throws SQLException, ClassNotFoundException{
+        String query = "select p.id_producto idp,p.descripcion pdes, c.descripcion cdes, precio from Producto p, Categoria c where "
+                    + "p.id_categoria = c.id_categoria";
+        ArrayList<String> args = new ArrayList<String>();
+        if(categoria.equals("all") && descripcion.equals("")){
+            Conexion.consultar(query);
+            
+        }
+        else{
+            
+            if(!categoria.equals("all")){
+                query = query + " and c.descripcion = ?";
+                args.add(categoria);
+            }
+            if(!descripcion.equals("")){
+                query = query + " and p.descripcion like ?";
+                args.add(descripcion);
+            }
+            Conexion.consultar(query, args);
+              
+        }
+            
+        while(Conexion.getResult().next()){
+            String id_producto = Conexion.getResult().getString("idp");
+            categoria = Conexion.getResult().getString("cdes");
+            String descripcion_prod = Conexion.getResult().getString("pdes");
+            String precio = Conexion.getResult().getString("precio");
+            this.addProducto(new Producto(id_producto, categoria,descripcion_prod,precio));
+        }
+        Conexion.cerrarConexion();
+        
     }
 }

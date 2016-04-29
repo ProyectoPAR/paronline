@@ -54,40 +54,14 @@ public class ServletPro extends HttpServlet {
             String descripcion = "";
             if(request.getParameter("categoria") == null && request.getParameter("descripcion") == null){
                 categoria = "all";
+                dispatcher = request.getRequestDispatcher("Producto.jsp");
             }
             else{
                 categoria = request.getParameter("categoria");
                 descripcion = '%'+request.getParameter("descripcion")+'%';
-            }
-            String query = "select p.id_producto idp,p.descripcion pdes, c.descripcion cdes, precio from Producto p, Categoria c where "
-                    + "p.id_categoria = c.id_categoria";
-            ArrayList<String> args = new ArrayList<String>();
-            if(categoria.equals("all") && descripcion.equals("")){
-                Conexion.consultar(query);
-                dispatcher = request.getRequestDispatcher("Producto.jsp");
-            }
-            else{
                 dispatcher = request.getRequestDispatcher("Busqueda.jsp");
-                if(!categoria.equals("all")){
-                    query = query + " and c.descripcion = ?";
-                    args.add(categoria);
-                }
-                if(!descripcion.equals("")){
-                    query = query + " and p.descripcion like ?";
-                    args.add(descripcion);
-                }
-                Conexion.consultar(query, args);
-              
             }
-            
-            while(Conexion.getResult().next()){
-                id_producto = Conexion.getResult().getString("idp");
-                categoria = Conexion.getResult().getString("cdes");
-                descripcion_prod = Conexion.getResult().getString("pdes");
-                precio = Conexion.getResult().getString("precio");
-                productos.addProducto(new Producto(id_producto, categoria,descripcion_prod,precio));
-            }
-            Conexion.cerrarConexion();
+            productos.getListaProductos(categoria, descripcion);
             session.setAttribute("lista_productos", productos);
             if(dispatcher != null){
                 dispatcher.forward(request, response);

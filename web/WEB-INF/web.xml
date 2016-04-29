@@ -20,6 +20,10 @@
         <servlet-name>ServletPop</servlet-name>
         <servlet-class>com.par.paronline.controlador.ServletPop</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletCompra</servlet-name>
+        <servlet-class>com.par.paronline.controlador.ServletCompra</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletLogin</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>ServletPop</servlet-name>
         <url-pattern>/ServletPop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCompra</servlet-name>
+        <url-pattern>/ServletCompra</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

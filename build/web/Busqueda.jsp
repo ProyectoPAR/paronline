@@ -55,28 +55,34 @@
                 <input type="text" name="descripcion" placeholder="Escriba una descripcion del producto"/>
                 <input type="submit" value="Buscar"/>
             </form>
+                
                   <%
                         ListaProductos productos = (ListaProductos)session.getAttribute("lista_productos");
                         ListaProductos carrito = (ListaProductos) session.getAttribute("carrito");
-                        for(int i = 0 ; i < productos.size() ; i ++){
+                        
+                        for(int i = 0 ; i < productos.size() ; i ++){%>
+                            <div>
+                            <%
                             if(!carrito.existeProducto(productos.get(i))){%>
-                            <form action="Carrito" method="get">
-                                <div>
+                                <form action="Carrito">
                                     <input type="text" name="descripcion" value="<%=productos.get(i).getDescripcion()%>" readonly="yes">
                                     <input type="submit" name="agregar-sacar" value="Agregar">
-                                </div>
-                            </form>
+                                    <input type="hidden" name="lastpage" value ="busqueda">
+                                </form>
                             <%}
                             else{%>
-                            <form action="ServletPop" method="get">
-                                <div>
+                                <form action="Carrito">
                                     <input type="text" name="descripcion" value="<%=productos.get(i).getDescripcion()%>" readonly="yes">
                                     <input type="submit" name="agregar-sacar" value="Sacar">
-                                </div>
-                            </form>
-                          <%}
+                                    <input type="hidden" name="lastpage" value ="busqueda">
+                                </form>
+                            
+                          <%}%>
+                          
+                            </div><%
                         }
                     %>
+                
                     <div><%=request.getContextPath()%></div>
                 
         </section>

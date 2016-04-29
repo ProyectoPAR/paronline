@@ -43,6 +43,8 @@ public class ServletPop extends HttpServlet {
             Producto p = carrito.buscarDescripcion(des_pro);//buscamos el producto a travez de su descripcion
             carrito.removeProducto(p);//removemos el producto del carrito
             
+            System.out.println(request.getContextPath());
+            
             if(dispatcher != null) dispatcher.forward(request, response);
         }
     }

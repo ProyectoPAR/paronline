@@ -10,18 +10,14 @@ import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import com.par.paronline.modelo.Producto;
-import com.par.paronline.modelo.ListaProductos;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletResponse;
 
 /**
- *Servlet para agregar producto a carrito
+ *
  * @author root
  */
-public class ServletAdd extends HttpServlet {
+public class ServletCompra extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,34 +31,18 @@ public class ServletAdd extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        RequestDispatcher dispatcher;
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            //el requesta dispatcher debe redirigir a la pagina de donde vino
-            RequestDispatcher dispatcher;
-            String lastpage = request.getParameter("lastpage");
-            if(lastpage.equals("busqueda"))
-                dispatcher = request.getRequestDispatcher("Busqueda.jsp");
-            else
-                dispatcher = request.getRequestDispatcher("Producto.jsp");
-            HttpSession session = request.getSession(true);//se recupera la session
-            ListaProductos productos = (ListaProductos)session.getAttribute("lista_productos");
-            String des_pro = (String)request.getParameter("descripcion");//se obtiene el parametro descripcion
-            ListaProductos carrito = (ListaProductos)session.getAttribute("carrito");//obtenemos el carrito de la session
-            String addpop = (String) request.getParameter("agregar-sacar");
-            Producto p = productos.buscarDescripcion(des_pro);
-            if(addpop.equals("Agregar")){
-                if(!carrito.existeProducto(p)){
-                    carrito.addProducto(p);//agregamos al carrito el producto, que por ahora es solo un string
-                    
-                }
+            if(request.getSession().getAttribute("user").equals("unknow")){
+                //si ya esta loqueado reenviar al formulario para completar los datos de la tarjeta de credito  
+                dispatcher = request.getRequestDispatcher("compra.jsp");
+                response.getWriter().println("no logueado");
             }
             else{
-                carrito.removeProducto(p);//sacamos el producto
+                //si el usuario no esta loguado el dispatcher redirige al index para loguearse o registrerse
+                dispatcher = request.getRequestDispatcher("index.html");
+                response.getWriter().println("logueado");
             }
-                
-            
-            
-            if(dispatcher != null) dispatcher.forward(request, response);
         }
     }
 

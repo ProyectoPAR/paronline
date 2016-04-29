@@ -10,7 +10,6 @@ import java.io.IOException;
 import com.sun.rowset.CachedRowSetImpl;
 import java.util.ArrayList;
 import javax.sql.rowset.CachedRowSet;
-import org.postgresql.Driver;
 import com.par.paronline.utils.Conexion;
 import com.par.paronline.modelo.Producto;
 import com.par.paronline.modelo.Producto;

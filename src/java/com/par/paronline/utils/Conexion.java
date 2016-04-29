@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class Conexion {
     public static String url = "jdbc:postgresql://localhost:5432/paronline";
     public static String user = "postgres";
-    public static String pass = "root"; //contrasenha de mi base de datos
+    public static String pass = "sate150495"; //contrasenha de mi base de datos
   
     public static Connection conexion = null;
     public static PreparedStatement sentencia = null;

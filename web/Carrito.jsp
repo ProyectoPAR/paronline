@@ -47,7 +47,7 @@
               <%}
             %>
         </form>
-        <a href="#">Comprar Productos</a>
-        <div><%=request.getContextPath()%></div>
+        <a href="ServletCompra">Comprar Productos</a>
+        <div><%= (String)request.getAttribute("javax.servlet.forward.request_uri")%></div>
     </body>
 </html>
