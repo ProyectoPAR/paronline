@@ -24,6 +24,10 @@
         <servlet-name>ServletCompra</servlet-name>
         <servlet-class>com.par.paronline.controlador.ServletCompra</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletABMProducto</servlet-name>
+        <servlet-class>com.par.paronline.controlador.ServletABMProducto</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletLogin</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>ServletCompra</servlet-name>
         <url-pattern>/ServletCompra</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletABMProducto</servlet-name>
+        <url-pattern>/ServletABMProducto</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

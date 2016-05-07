@@ -5,6 +5,8 @@
  */
 package componentes;
 
+import com.par.paronline.modelo.ABMProducto;
+import com.par.paronline.modelo.ListaCategorias;
 import java.sql.*;
 import java.io.IOException;
 import com.sun.rowset.CachedRowSetImpl;
@@ -12,14 +14,7 @@ import java.util.ArrayList;
 import javax.sql.rowset.CachedRowSet;
 import com.par.paronline.utils.Conexion;
 import com.par.paronline.modelo.Producto;
-import com.par.paronline.modelo.Producto;
-import com.par.paronline.modelo.Producto;
-import com.par.paronline.modelo.Producto;
-import com.par.paronline.modelo.Producto;
-import com.par.paronline.modelo.Producto;
-import com.par.paronline.modelo.Producto;
-import com.par.paronline.modelo.Producto;
-import com.par.paronline.modelo.Producto;
+
 
 /**
  *
@@ -32,45 +27,26 @@ public class PruebaBase {
     String categoria = "";
     String id_producto = "";
     ArrayList<Producto> productos = new ArrayList<Producto>();
-    public void f(){
-        try{
+    public void f() throws SQLException, ClassNotFoundException{
+        
+            String desp = "Medias adidas";
+            double precio = 9.5;
             String categoria = "Deportes";
-            String descripcion = "";
-            String query = "select p.id_producto idp, p.descripcion pdes, c.descripcion cdes, precio from Producto p, Categoria c where "
-                    + "p.id_categoria = c.id_categoria";
-            ArrayList<String> args = new ArrayList<String>();
-            if(categoria.equals("all") && descripcion.equals("")){
-                Conexion.consultar(query);
-            }
-            else{
-                if(!categoria.equals("all")){
-                    query = query + " and c.descripcion = ?";
-                    args.add(categoria);
-                }
-                if(!descripcion.equals("")){
-                    query = query + " and p.descripcion like ?";
-                    args.add(descripcion);
-                }
-                Conexion.consultar(query, args);
-              
-            }
+            String imagen = "/ruta/imagen";
+            ABMProducto abm = new ABMProducto();
+            ArrayList args = new ArrayList();
+            ListaCategorias c = new ListaCategorias();
+            c.getListaCategorias();
+            args.add(desp);
+            args.add(imagen);
+            args.add(precio);
+            args.add(Integer.parseInt( c.buscarDescripcion(categoria).getId_categoria()));
+            args.add(3);
+            abm.modificar(args);
             
-            while(Conexion.getResult().next()){
-                id_producto = Conexion.getResult().getString("idp");
-                producto = Conexion.getResult().getString("pdes");
-                descripcion_prod = Conexion.getResult().getString("cdes");
-                precio = Conexion.getResult().getString("precio");
-                productos.add(new Producto(id_producto, categoria,descripcion_prod,precio));
-                System.out.println(producto + descripcion_prod + precio);
-            }
-            Conexion.cerrarConexion();
-            
-        }
-        catch(Exception e){
-            System.out.println("hola "+e);
-        }
+        
     }
-    public static void main(String args[]){
+    public static void main(String args[]) throws SQLException, ClassNotFoundException{
         PruebaBase p = new PruebaBase();
         p.f();
     }

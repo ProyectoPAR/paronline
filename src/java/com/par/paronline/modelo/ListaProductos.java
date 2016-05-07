@@ -61,7 +61,7 @@ public class ListaProductos{
     }
     
     public void getListaProductos(String categoria, String descripcion) throws SQLException, ClassNotFoundException{
-        String query = "select p.id_producto idp,p.descripcion pdes, c.descripcion cdes, precio from Producto p, Categoria c where "
+        String query = "select p.id_producto idp,p.descripcion pdes, c.descripcion cdes, precio_unitario from Productos p, Categorias c where "
                     + "p.id_categoria = c.id_categoria";
         ArrayList<String> args = new ArrayList<String>();
         if(categoria.equals("all") && descripcion.equals("")){
@@ -86,7 +86,7 @@ public class ListaProductos{
             String id_producto = Conexion.getResult().getString("idp");
             categoria = Conexion.getResult().getString("cdes");
             String descripcion_prod = Conexion.getResult().getString("pdes");
-            String precio = Conexion.getResult().getString("precio");
+            String precio = Conexion.getResult().getString("precio_unitario");
             this.addProducto(new Producto(id_producto, categoria,descripcion_prod,precio));
         }
         Conexion.cerrarConexion();

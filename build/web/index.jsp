@@ -34,6 +34,7 @@
                 <li> <form action="Usuario" method="get"><input type="submit" value="Usuario"/></form> </li>
                 <li> <a href="Producto">Producto</a>
                 <li> <a href="Carrito.jsp"> Carrito</a> </li>
+                <li> <a href="ABMProducto.jsp"> ABM Producto</a> </li>
               </ul>
             </nav>
           </div>

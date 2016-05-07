@@ -17,7 +17,7 @@
 <%!//esta funcion obtiene todos las categorias y las almacena en un arraylist de String
     public ArrayList<String> getCategorias() throws SQLException, ClassNotFoundException{
         ArrayList<String> categorias = new ArrayList<String>();
-        Conexion.consultar("select descripcion from Categoria");
+        Conexion.consultar("select descripcion from Categorias");
         while(Conexion.getResult().next()) categorias.add(Conexion.getResult().getString("descripcion"));
         return categorias;
     }

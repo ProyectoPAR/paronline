@@ -20,10 +20,10 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 public class Conexion {
-    public static String url = "jdbc:postgresql://localhost:5432/paronline";
+    public static String url = "jdbc:postgresql://localhost:5432/Tienda";
     public static String user = "postgres";
     public static String pass = "sate150495"; //contrasenha de mi base de datos
-  
+    
     public static Connection conexion = null;
     public static PreparedStatement sentencia = null;
     public static ResultSet result = null;
@@ -31,6 +31,16 @@ public class Conexion {
     public Conexion(String url, String user, String pass)throws SQLException, ClassNotFoundException{
         Class.forName("org.postgresql.Driver");
         this.conexion = DriverManager.getConnection(url,user, pass);
+    }
+    
+    public Connection getConexion()throws SQLException, ClassNotFoundException{
+        Class.forName("org.postgresql.Driver");
+        this.conexion = DriverManager.getConnection(url,user,pass);
+        return this.conexion;
+    }
+    
+    public void closeConexion()throws SQLException, ClassNotFoundException{
+        this.conexion.close();
     }
 
     /**
@@ -51,6 +61,13 @@ public class Conexion {
         result = sentencia.executeQuery();
     }
     
+    public static PreparedStatement getPrepareStatement(String query)throws SQLException, ClassNotFoundException{
+        Class.forName("org.postgresql.Driver");
+        conexion = DriverManager.getConnection(url,user, pass);
+        sentencia = conexion.prepareStatement(query);
+        return sentencia;
+    }
+    
     public static void consultar(String query) throws SQLException, ClassNotFoundException{
         Class.forName("org.postgresql.Driver");
         conexion = DriverManager.getConnection(url,user, pass);
@@ -58,13 +75,21 @@ public class Conexion {
         result = sentencia.executeQuery();
     }
     
+    public static void iduquery (PreparedStatement sentencia)throws SQLException, ClassNotFoundException{
+        Class.forName("org.postgresql.Driver");
+        conexion = DriverManager.getConnection(url,user,pass);
+        sentencia.executeUpdate();
+        sentencia.close();
+        
+    }
+    
     public static ResultSet getResult(){
         return result;
     }
     
     public static void cerrarConexion() throws SQLException{
-        result.close();
-        sentencia.close();
+        if (result != null)result.close();
+        if(sentencia != null) sentencia.close();
         conexion.close();
     }
         
