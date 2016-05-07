@@ -5,6 +5,7 @@
  */
 package com.par.paronline.controlador;
 
+import com.par.paronline.modelo.ManagerDB;
 import com.par.paronline.modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,18 +25,18 @@ import javax.servlet.RequestDispatcher;
  */
 public class ServletLogin extends HttpServlet {
 
-    public Usuario comprobarLogin(String user,String pass) throws SQLException, ClassNotFoundException{
+    public Usuario comprobarLogin(String user,String pass) throws SQLException, ClassNotFoundException, Exception{
     Usuario u = null;
     ArrayList<String> args = new ArrayList();
     args.add(user);
     args.add(pass);
     String sql = "select * from persona where usuario = ? and pass = ?;";
-  
-    Conexion.consultar(sql, args);
-    if(Conexion.result.next()){
+    ManagerDB man = new ManagerDB();
+    man.consultar(sql, args);
+    if(man.getResult().next()){
         Usuario us = new Usuario();
-        us.setUsuario(Conexion.getResult().getString("usuario"));
-        us.setPass(Conexion.getResult().getString("pass")); 
+        us.setUsuario(man.getResult().getString("usuario"));
+        us.setPass(man.getResult().getString("pass")); 
         return us;
     }
 

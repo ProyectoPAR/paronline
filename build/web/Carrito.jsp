@@ -5,7 +5,6 @@
 --%>
 <%@page 
         import  = "com.par.paronline.modelo.Producto"
-        import = "com.par.paronline.utils.Conexion"
         import = "java.util.ArrayList"
         import = "java.sql.SQLException" 
         import = "java.io.PrintWriter"

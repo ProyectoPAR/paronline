@@ -8,7 +8,7 @@ package com.par.paronline.modelo;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import com.par.paronline.modelo.Categoria;
-import com.par.paronline.utils.Conexion;
+import com.par.paronline.modelo.ManagerDB;
 
 /**
  *
@@ -61,16 +61,17 @@ public class ListaCategorias {
         return this.categorias.size();
     }
     
-    public void getListaCategorias() throws SQLException, ClassNotFoundException{
+    public void getListaCategorias() throws SQLException, ClassNotFoundException, Exception{
+        ManagerDB man = new ManagerDB();
         String query = "select id_categoria, descripcion from Categorias";
-        Conexion.consultar(query);
+        man.consultar(query);
             
-        while(Conexion.getResult().next()){
-            String id_categoria = Conexion.getResult().getString("id_categoria");
-            String descripcion = Conexion.getResult().getString("descripcion");
+        while(man.getResult().next()){
+            String id_categoria = man.getResult().getString("id_categoria");
+            String descripcion = man.getResult().getString("descripcion");
             this.addCategoria(new Categoria(id_categoria,descripcion));
         }
-        Conexion.cerrarConexion();
+        
         
     }
 }

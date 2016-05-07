@@ -27,26 +27,13 @@ public class PruebaBase {
     String categoria = "";
     String id_producto = "";
     ArrayList<Producto> productos = new ArrayList<Producto>();
-    public void f() throws SQLException, ClassNotFoundException{
+    public void f() throws SQLException, ClassNotFoundException, Exception{
+
         
-            String desp = "Medias adidas";
-            double precio = 9.5;
-            String categoria = "Deportes";
-            String imagen = "/ruta/imagen";
-            ABMProducto abm = new ABMProducto();
-            ArrayList args = new ArrayList();
-            ListaCategorias c = new ListaCategorias();
-            c.getListaCategorias();
-            args.add(desp);
-            args.add(imagen);
-            args.add(precio);
-            args.add(Integer.parseInt( c.buscarDescripcion(categoria).getId_categoria()));
-            args.add(3);
-            abm.modificar(args);
             
         
     }
-    public static void main(String args[]) throws SQLException, ClassNotFoundException{
+    public static void main(String args[]) throws SQLException, ClassNotFoundException, Exception{
         PruebaBase p = new PruebaBase();
         p.f();
     }

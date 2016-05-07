@@ -3,19 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/fabricio/NetBeansProjects/Carrito/web/js/controles_abm.js</file>
+            <file>file:/home/fabricio/NetBeansProjects/Carrito/nbproject/build-impl.xml</file>
             <file>file:/home/fabricio/NetBeansProjects/Carrito/web/index.jsp</file>
+            <file>file:/home/fabricio/NetBeansProjects/Carrito/web/META-INF/context.xml</file>
             <file>file:/home/fabricio/NetBeansProjects/Carrito/src/java/com/par/paronline/utils/Conexion.java</file>
             <file>file:/home/fabricio/NetBeansProjects/Carrito/src/java/com/par/paronline/modelo/ListaProductos.java</file>
             <file>file:/home/fabricio/NetBeansProjects/Carrito/web/WEB-INF/web.xml</file>
             <file>file:/home/fabricio/NetBeansProjects/Carrito/src/java/componentes/PruebaBase.java</file>
-            <file>file:/home/fabricio/NetBeansProjects/Carrito/src/java/com/par/paronline/controlador/ServletLogin.java</file>
-            <file>file:/home/fabricio/NetBeansProjects/Carrito/src/java/com/par/paronline/modelo/ABMProducto.java</file>
-            <file>file:/home/fabricio/NetBeansProjects/Carrito/web/ABMProducto.jsp</file>
-            <file>file:/home/fabricio/NetBeansProjects/Carrito/src/java/com/par/paronline/modelo/ListaCategorias.java</file>
-            <file>file:/home/fabricio/NetBeansProjects/Carrito/web/ModificarProducto.jsp</file>
-            <file>file:/home/fabricio/NetBeansProjects/Carrito/src/java/com/par/paronline/controlador/ServletABMProducto.java</file>
-            <file>file:/home/fabricio/NetBeansProjects/Carrito/src/java/com/par/paronline/modelo/Categoria.java</file>
+            <file>file:/home/fabricio/NetBeansProjects/Carrito/src/java/com/par/paronline/modelo/Producto.java</file>
         </group>
     </open-files>
 </project-private>

@@ -37,7 +37,7 @@ public class ServletABMProducto extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException, ClassNotFoundException {
+            throws ServletException, IOException, SQLException, ClassNotFoundException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         
             String accion = request.getParameter("accion");
@@ -66,16 +66,11 @@ public class ServletABMProducto extends HttpServlet {
                     abm.alta(args);
                 }
                 if(accion.equals("update")){
-                    
-                    
-
                     dispatcher = request.getRequestDispatcher("ModificarProducto.jsp");
                 }
                 if(accion.equals("delete")){
                     int id = Integer.parseInt(request.getParameter("id_producto"));
-
                     abm.baja(id);
-
                 }
                 if(lastpage != null && lastpage.equals("MP")){
                     String id_producto = request.getParameter("id_producto");
@@ -93,11 +88,6 @@ public class ServletABMProducto extends HttpServlet {
                 }
                 dispatcher.forward(request, response);
             }
-            
-            
-                          
-
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -117,6 +107,8 @@ public class ServletABMProducto extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(ServletABMProducto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ServletABMProducto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(ServletABMProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -138,6 +130,8 @@ public class ServletABMProducto extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(ServletABMProducto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ServletABMProducto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(ServletABMProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
         

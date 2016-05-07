@@ -5,8 +5,9 @@
 --%>
 <%@page 
         import  = "com.par.paronline.modelo.Producto"
-        import = "com.par.paronline.utils.Conexion"
+        import = "com.par.paronline.modelo.ManagerDB"
         import = "com.par.paronline.modelo.ListaProductos"
+        import = "com.par.paronline.modelo.ListaCategorias"
         import = "java.util.ArrayList"
         import = "java.sql.SQLException" 
         import = "java.io.PrintWriter"%>
@@ -15,12 +16,6 @@
 
 
 <%!//esta funcion obtiene todos las categorias y las almacena en un arraylist de String
-    public ArrayList<String> getCategorias() throws SQLException, ClassNotFoundException{
-        ArrayList<String> categorias = new ArrayList<String>();
-        Conexion.consultar("select descripcion from Categorias");
-        while(Conexion.getResult().next()) categorias.add(Conexion.getResult().getString("descripcion"));
-        return categorias;
-    }
 %>
 <!DOCTYPE html>
 <html>
@@ -47,10 +42,11 @@
                 <select name="categoria">
                     <option value="all">Todas</option>
                     <%//cargamos las categorias obtenidas de la funcion en un select, exite un valor por default
-                        ArrayList<String> categorias = getCategorias();
+                        ListaCategorias categorias = new ListaCategorias();
+                        categorias.getListaCategorias();
                         for(int i = 0 ; i < categorias.size() ; i ++){%> 
-                            <option value="<%=categorias.get(i)%>"> 
-                            <%=categorias.get(i)%> </option> <%}
+                            <option value="<%=categorias.get(i).getDescripcion()%>"> 
+                            <%=categorias.get(i).getDescripcion()%> </option> <%}
                     %>
                 </select>
                 <input type="text" name="descripcion" placeholder="Escriba una descripcion del producto"/>
